@@ -134,10 +134,16 @@
   /**
    * Preloader
    */
-  let preloader = select("#preloader");
+  let preloader = document.querySelector("#preloader");
   if (preloader) {
     window.addEventListener("load", () => {
-      preloader.remove();
+      // Hapus preloader dan animasinya
+      preloader.classList.add("hide-preloader");
+
+      // Tunggu selesainya animasi sebelum menghapus elemen preloader dari DOM
+      preloader.addEventListener("animationend", () => {
+        preloader.remove();
+      });
     });
   }
 
@@ -276,6 +282,9 @@
         true
       );
     }
+
+    $(".portfolio-prioritas").click();
+
   });
 
   /**
