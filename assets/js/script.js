@@ -164,6 +164,34 @@
   }
 
   /**
+   * Shopping Cart
+   */
+
+    const shoppingCart = document.querySelector('.shopping-cart');
+    document.querySelector('#shopping-cart-button').onclick = (e) => {
+      shoppingCart.classList.toggle('active');
+      e.preventDefault()
+    }
+
+    const body = document.querySelector('.body');
+    const header = document.querySelector('#header');
+    const  hm = document.querySelector('.mobile-nav-toggle');
+    const  sc = document.querySelector('#shopping-cart-button');
+
+    document.addEventListener('click', function (e) {
+      if(!hm.contains(e.target) && !header.contains(e.target)) {
+        body.classList.remove('mobile-nav-active');
+        let navbarToggle = select(".mobile-nav-toggle");
+        navbarToggle.classList.toggle("bi-list");
+        navbarToggle.classList.toggle("bi-x");
+      }
+      if(!sc.contains(e.target) && !shoppingCart.contains(e.target)) {
+        shoppingCart.classList.remove('active');
+      }
+    });
+
+
+  /**
    * Skills animation
    */
   let skilsContent = select(".skills-content");

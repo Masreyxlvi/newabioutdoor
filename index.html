@@ -23,14 +23,14 @@
     <!-- Glighbox -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
-
+    
     <!-- jquery -->
     <script src="assets/js/jquery.js"></script>
     <!-- jquery UI -->
     <link rel="stylesheet" href="assets/css/jquery-ui.css" />
     <script src="assets/js/jquery-ui.js"></script>
   </head>
-  <body>
+  <body class="body" x-data>
     <i class="bi bi-list mobile-nav-toggle d-md-none"></i>
     <!-- ======= Header ======= -->
     <header id="header" class="d-flex flex-column justify-content-center">
@@ -54,18 +54,64 @@
           <li>
             <a href="#laundry" class="nav-link scrollto"><i class="bx bxs-washer"></i> <span>Loundry</span></a>
           </li>
-          <!-- <li>
-            <a href="#services" class="nav-link scrollto"><i class="bx bx-news"></i> <span>News</span></a>
-          </li>
-          <li>
-            <a href="#testimonials" class="nav-link scrollto"><i class="bx bx-message-dots"></i> <span>Review Customer</span></a>
-          </li> -->
           <li>
             <a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a>
           </li>
         </ul>
       </nav>
       <!-- .nav-menu -->
+
+    </header>
+    <!-- End Header -->
+    <!-- ======= Header ======= -->
+    <header id="header-cart" class="d-flex flex-column justify-content-center">
+     <!-- Shoping Cart -->
+     <div class="shopping-cart">
+      <template x-for="(item, index) in $store.cart.items" x-key="index">
+        <div class="cart-item">
+          <img :src="`assets/image/product/${item.img}`" :alt="item.name">
+          <div class="item-detail">
+            <h3 x-text="item.name"></h3>
+            <div class="item-price">
+              <span x-text="rupiah(item.price)"></span> &times;
+              <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+              <span x-text="item.quantity"></span>
+              <button id="add" @click="$store.cart.add(item)">&plus;</button> &equals;
+              <span x-text="rupiah(item.total)"></span>
+            </div>
+          </div>
+        </div>
+      </template>
+      <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;"> Cart Is Empty</h4>
+      <h4 x-show="$store.cart.items.length"> Total : <span x-text="rupiah($store.cart.total)"></span> </h4>
+      <form action="" id="checkout" x-show="$store.cart.items.length" >
+        <h3 class="mt-5 mb-2 text-center">Costumer Detail</h3>
+        <div class="form-floating mb-3">
+          <input type="date"class="form-control form-control-sm" name="date" id="date" placeholder="date">
+          <label for="date">Tanggal Pemesanan</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control form-control-sm" name="nama" id="name" placeholder="name">
+          <label for="name">Nama</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="name@example.com">
+          <label for="email">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="number" class="form-control form-control-sm" name="no_telp" id="no_telp" placeholder="812344566">
+          <label for="no_telp">No Telp</label>
+        </div>
+        <div class="form-floating">
+          <textarea class="form-control form-control-sm" name="alamat" id placeholder="Leave a comment here" id="alamat"></textarea>
+          <label for="alamat">Alamat</label>
+        </div>
+        <div class="text-center mb-2">
+          <button type="submit" id="submit" class="btn btn-info">Check Out</button>
+        </div>
+      </form>
+    </div>
+
     </header>
     <!-- End Header -->
 
@@ -139,7 +185,7 @@
         </div>
         
         <br />
-        <div style="box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 700; line-height: 1.2; font-size: 26px; font-family: Raleway, sans-serif; color: rgb(114, 131, 148); background-color: rgb(255, 255, 255);"><span style="color: rgb(119, 119, 119);">KENAPA SEWA DI NONA ?</span></div>
+        <div style="box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 700; line-height: 1.2; font-size: 26px; font-family: Raleway, sans-serif; color: rgb(114, 131, 148); background-color: rgb(255, 255, 255);"><span style="color: rgb(119, 119, 119);">KENAPA SEWA DI NEWABI ?</span></div>
         <p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;">Berikut ini adalah alasan kenapa harus sewa di Newabi Outdoor bukan ditempat lain, karena :&nbsp;</p>
         <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;"><strong><span style="color: rgb(1, 115, 193);">>> </span></strong><strong><span style="background-color: rgb(255, 255, 255); color: rgb(255, 140, 0);"><span style="color: rgb(255, 140, 0);"><span style="color: rgb(1, 115, 193);">BUKA SETIAP </span><span style="color: rgb(1, 115, 193);">HARI</span></span></span></strong></p>
         <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;"><b>-</b> Tanggal merah & hari libur nasional tetap buka</p>
@@ -507,7 +553,7 @@
           </div>
         </div>
 
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200" x-data="product">
           <!--  -->
          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-0">
             <div class="portfolio-wrap">
@@ -523,329 +569,101 @@
           </div>
 
           <!-- tenda -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-1">
-            <div class="portfolio-wrap">
-              <img src="assets/image/tenda/bigdome.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Big Dome 6 Pro</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/tenda/bigdome.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Tenda"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/tenda/bigdome.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
+          <template x-for="(item, index) in tenda" x-key="index">
+             <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-1">
+              <div class="portfolio-wrap">
+                <img :src="`assets/image/product/${item.img}`" class="img-fluid" :alt="item.name">
+                <div class="portfolio-info">
+                  <h4 x-text="item.name"></h4>
+                  <div style="font-size: 1rem; font-weight: lighter;" x-text="rupiah(item.price)"></div>
+                  <div class="portfolio-links">
+                    <a href="#" @click.prevent="$store.cart.add(item)"><i class="bx bx-plus"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-1">
-            <div class="portfolio-wrap">
-              <img src="assets/image/tenda/dome.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Easy Dome 2</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/tenda/dome.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Tenda"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/tenda/dome.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-1">
-            <div class="portfolio-wrap">
-              <img src="assets/image/tenda/besport.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Besport</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/tenda/besport.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Tenda"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/tenda/besport.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-1">
-            <div class="portfolio-wrap">
-              <img src="assets/image/tenda/borneo 3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Borneo 3</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/tenda/borneo 3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Tenda"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/tenda/borneo 3.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-1">
-            <div class="portfolio-wrap">
-              <img src="assets/image/tenda/borneo 4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Borneo 4</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/tenda/borneo 4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Tenda"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/tenda/borneo 4.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-         
+          </template>
+  
           <!-- carrier -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-2">
-            <div class="portfolio-wrap">
-              <img src="assets/image/backpacking/1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Daypack 5L</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/backpacking/1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Carrier"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/backpacking/1.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
+          <template x-for="(item, index) in carrier" x-key="index">
+            <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-2">
+              <div class="portfolio-wrap">
+                <img :src="`assets/image/product/${item.img}`" class="img-fluid" :alt="item.name">
+                <div class="portfolio-info">
+                  <h4 x-text="item.name"></h4>
+                  <div style="font-size: 1rem; font-weight: lighter;" x-text="rupiah(item.price)"></div>
+                  <div class="portfolio-links">
+                    <a href="#" @click.prevent="$store.cart.add(item)"><i class="bx bx-plus"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-2">
-            <div class="portfolio-wrap">
-              <img src="assets/image/backpacking/2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Carrier Sunature Futura Pro</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/backpacking/2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Carrier"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/backpacking/2.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-2">
-            <div class="portfolio-wrap">
-              <img src="assets/image/backpacking/3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Carrier Deuter Futura 32</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/backpacking/3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Carrier"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/backpacking/3.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-2">
-            <div class="portfolio-wrap">
-              <img src="assets/image/backpacking/4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Carrier Osprey Kestrey 48</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/backpacking/4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Carrier"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/backpacking/4.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          </template>
+      
 
           <!-- Alat Masak -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-3">
-            <div class="portfolio-wrap">
-              <img src="assets/image/alat-masak/1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Kompor Portable Kotak</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/alat-masak/1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Alat Masak"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/alat-masak/1.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
+          <template x-for="(item, index) in masak" x-key="index">
+            <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-3">
+              <div class="portfolio-wrap">
+                <img :src="`assets/image/product/${item.img}`" class="img-fluid" :alt="item.name">
+                <div class="portfolio-info">
+                  <h4 x-text="item.name"></h4>
+                  <div style="font-size: 1rem; font-weight: lighter;" x-text="rupiah(item.price)"></div>
+                  <div class="portfolio-links">
+                    <a href="#" @click.prevent="$store.cart.add(item)"><i class="bx bx-plus"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-3">
-            <div class="portfolio-wrap">
-              <img src="assets/image/alat-masak/2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Kompor Portable Mawar</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/alat-masak/2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Alat Masak"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/alat-masak/2.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-3">
-            <div class="portfolio-wrap">
-              <img src="assets/image/alat-masak/3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Kompor Portable Koper</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/alat-masak/3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Alat Masak"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/alat-masak/3.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-3">
-            <div class="portfolio-wrap">
-              <img src="assets/image/alat-masak/4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Cooking Seet Ds 200</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/alat-masak/4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Alat Masak"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/alat-masak/4.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-3">
-            <div class="portfolio-wrap">
-              <img src="assets/image/alat-masak/5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Cooking Seet Ds 308</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/alat-masak/5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Alat Masak"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/alat-masak/5.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-3">
-            <div class="portfolio-wrap">
-              <img src="assets/image/alat-masak/6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Gas Portable</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/alat-masak/6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Alat Masak"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/alat-masak/6.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          </template>
           
           <!-- Penerangan -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-4">
-            <div class="portfolio-wrap">
-              <img src="assets/image/penerangan/1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>HeadLamp</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/penerangan/1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Penerangan"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/penerangan/1.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
+          <template x-for="(item, index) in penerangan" x-key="index">
+            <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-4">
+              <div class="portfolio-wrap">
+                <img :src="`assets/image/product/${item.img}`" class="img-fluid" :alt="item.name">
+                <div class="portfolio-info">
+                  <h4 x-text="item.name"></h4>
+                  <div style="font-size: 1rem; font-weight: lighter;" x-text="rupiah(item.price)"></div>
+                  <div class="portfolio-links">
+                    <a href="#" @click.prevent="$store.cart.add(item)"><i class="bx bx-plus"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-4">
-            <div class="portfolio-wrap">
-              <img src="assets/image/penerangan/2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>HeadLamp Electric</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/penerangan/2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Penerangan"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/penerangan/2.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-4">
-            <div class="portfolio-wrap">
-              <img src="assets/image/penerangan/3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Lampu Lentera</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/penerangan/3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Penerangan"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/penerangan/3.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          </template>
 
           <!-- Pribadi -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-5">
-            <div class="portfolio-wrap">
-              <img src="assets/image/pribadi/1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info"> 
-                <h4>Sleeping Bag</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/pribadi/1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Pribadi"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/pribadi/1.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
+          <template x-for="(item, index) in pribadi" x-key="index">
+            <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-5">
+              <div class="portfolio-wrap">
+                <img :src="`assets/image/product/${item.img}`" class="img-fluid" :alt="item.name">
+                <div class="portfolio-info">
+                  <h4 x-text="item.name"></h4>
+                  <div style="font-size: 1rem; font-weight: lighter;" x-text="rupiah(item.price)"></div>
+                  <div class="portfolio-links">
+                    <a href="#" @click.prevent="$store.cart.add(item)"><i class="bx bx-plus"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-5">
-            <div class="portfolio-wrap">
-              <img src="assets/image/pribadi/2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info"> 
-                <h4>Tracking Pole</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/pribadi/2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Pribadi"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/pribadi/2.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-5">
-            <div class="portfolio-wrap">
-              <img src="assets/image/pribadi/3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info"> 
-                <h4>Sarung Tangan</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/pribadi/3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Pribadi"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/pribadi/3.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-5">
-            <div class="portfolio-wrap">
-              <img src="assets/image/pribadi/4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info"> 
-                <h4>Sepatu Tracking</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/pribadi/4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Pribadi"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/pribadi/4.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          </template>
 
           <!-- Tambahan -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-6">
-            <div class="portfolio-wrap">
-              <img src="assets/image/aksesoris/1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Matras Spons</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/aksesoris/1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Tambahan"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/aksesoris/1.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
+          <template x-for="(item, index) in tambahan" x-key="index">
+            <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-6">
+              <div class="portfolio-wrap">
+                <img :src="`assets/image/product/${item.img}`" class="img-fluid" :alt="item.name">
+                <div class="portfolio-info">
+                  <h4 x-text="item.name"></h4>
+                  <div style="font-size: 1rem; font-weight: lighter;" x-text="rupiah(item.price)"></div>
+                  <div class="portfolio-links">
+                    <a href="#" @click.prevent="$store.cart.add(item)"><i class="bx bx-plus"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-prioritas filter-6">
-            <div class="portfolio-wrap">
-              <img src="assets/image/aksesoris/2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Matras Lipat</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/aksesoris/2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Tambahan"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/aksesoris/2.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-6">
-            <div class="portfolio-wrap">
-              <img src="assets/image/aksesoris/3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Flysheet</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/aksesoris/3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Tambahan"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/aksesoris/3.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 portfolio-item filter-6">
-            <div class="portfolio-wrap">
-              <img src="assets/image/aksesoris/4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Meja & Kursi Lipat</h4>
-                <div class="portfolio-links">
-                  <a href="assets/image/aksesoris/4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Tambahan"><i class="bx bx-plus"></i></a>
-                  <a href="assets/image/aksesoris/4.jpg" target="_blank" data-glightbox="type: external" title="View Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-           
+          </template>
         </div>
 
       </div>
@@ -986,10 +804,10 @@
     <!-- Spinner -->
     <div class="spinner"></div>
   </div>
-  <button class="back-to-top d-flex align-items-center justify-content-center border-0">
+  <button class="back-to-top d-flex align-items-center justify-content-center border-0 " id="shopping-cart-button" >
     <i class="bx bx-cart"></i>
-    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
-      99+
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;" x-text="$store.cart.quantity"  x-show="$store.cart.quantity">
+      
       <span class="visually-hidden">unread messages</span>
     </span>
   </button>
@@ -1004,6 +822,11 @@
   <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- App -->
+  <script src="assets/src/app.js"></script>
   <script src="assets/js/script.js"></script>
 
   <!-- Template Main JS File -->
@@ -1072,9 +895,22 @@
     </div>
   </div>
 
- 
+  </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+        document.getElementById("date").valueAsDate = new Date();
+
+        // Mendapatkan nilai dari input tanggal
+        var inputTanggal = document.getElementById("date").valueAsDate;
+
+        // Mengatur nilai h4 dengan format "Hari, Tanggal Bulan Tahun"
+        var options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+        var formattedDate = inputTanggal.toLocaleDateString("id-ID", options);
+        document.getElementById("tgl_produksi").textContent = formattedDate;
+      });
+    </script>
     <script>
- 
+      
       $(document).ready(function() {
         init();
   
