@@ -107,7 +107,7 @@
           <label for="alamat">Alamat</label>
         </div>
         <div class="text-center mb-2">
-          <button type="submit" id="submit" class="btn btn-info">Check Out</button>
+          <button type="submit" id="submit" class="btn btn-dark">Check Out</button>
         </div>
       </form>
     </div>
@@ -906,7 +906,6 @@
         // Mengatur nilai h4 dengan format "Hari, Tanggal Bulan Tahun"
         var options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
         var formattedDate = inputTanggal.toLocaleDateString("id-ID", options);
-        document.getElementById("tgl_produksi").textContent = formattedDate;
       });
     </script>
     <script>

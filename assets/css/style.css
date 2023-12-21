@@ -169,6 +169,7 @@ h6 {
   top: 0;
   left: 0;
   right: 0;
+  /* padding: 15px; */
   z-index: 9997;
 }
 
@@ -180,17 +181,22 @@ h6 {
     left: -100%;
   }
   .shopping-cart{
-    width: 25rem !important;
+    width: 300px !important;
+  }
+
+  .shopping-cart img{
+    height: 2rem !important;
   }
   .shopping-cart h3{
-    font-size: 1rem !important;
+    font-size: 0.8rem !important;
   }
   .shopping-cart .item-price{
-    font-size: 0.8rem !important;
+    font-size: 0.6rem !important;
   }
   .shopping-cart .cart-item #add,
   .shopping-cart .cart-item #remove{
-    font-size: 0.8rem !important;
+    font-size: 0.4rem !important;
+    padding: 1px 3px;
   }
 }
 
@@ -547,6 +553,7 @@ section {
 
 .section-title p {
   margin-bottom: 0;
+  text-align: justify;
 }
 
 /*--------------------------------------------------------------
