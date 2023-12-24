@@ -37,7 +37,13 @@ document.addEventListener('alpine:init', () => {
 			{id: 23, name: 'Matras Lipat Spons', img: 'tambahan2.jpg', price:10000},
 			{id: 24, name: 'Flysheet', img: 'tambahan3.jpg', price:15000},
 			{id: 25, name: 'Meja & Kursi Lipat', img: 'tambahan4.jpg', price:15000},
-		]	
+		],
+		modalItem: {}, // Add a property to store the current modal item
+
+		showModal(item) {
+				this.modalItem = item; // Set the modalItem property to the selected item
+				$('#detail-product').modal('show'); // Use jQuery to show the modal
+		},
 		}));
 
 		Alpine.store('cart', {
@@ -94,9 +100,10 @@ document.addEventListener('alpine:init', () => {
 					this.items = this.items.filter((item) => item.id !== id);
 
 					this.quantity--;
-					this.total -= cartItem.price;
+					this.total -= cartItem.price; 
 				}
-			}
+			},
+		
 		});
 		
 });
