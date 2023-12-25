@@ -1,8 +1,8 @@
 document.addEventListener('alpine:init', () => {
 	Alpine.data('product', () => ({
 		tenda: [
-			{id: 1, name: 'Tenda Big Dome 6 Pro', img: 'tenda1.jpg', price:75000},
-			{id: 2, name: 'Tenda Easy Dome 2 ', img: 'tenda2.jpg', price:20000},
+			{id: 1, name: 'Big Dome 6 Pro', img: 'tenda1.jpg', price:75000},
+			{id: 2, name: 'Easy Dome 2 ', img: 'tenda2.jpg', price:20000},
 			{id: 3, name: 'Bespot', img: 'tenda3.jpg', price:35000},
 			{id: 4, name: 'Borneo 3', img: 'tenda4.jpg', price:40000},
 			{id: 5, name: 'Borneo 4', img: 'tenda5.jpg', price:50000},
@@ -38,73 +38,115 @@ document.addEventListener('alpine:init', () => {
 			{id: 24, name: 'Flysheet', img: 'tambahan3.jpg', price:15000},
 			{id: 25, name: 'Meja & Kursi Lipat', img: 'tambahan4.jpg', price:15000},
 		],
-		modalItem: {}, // Add a property to store the current modal item
 
-		showModal(item) {
-				this.modalItem = item; // Set the modalItem property to the selected item
-				$('#detail-product').modal('show'); // Use jQuery to show the modal
-		},
 		}));
 
 		Alpine.store('cart', {
 			items: [],
 			total: 0,
 			quantity: 0,
-			add(newItem) {
-				// cek apakah ada barang yang sama
-
-				const cartItem  = this.items.find((item) => item.id === newItem.id);
-
-				// jika belum ada / cart masih kosong
-
-				if(!cartItem){
-					this.items.push({...newItem, quantity: 1, total: newItem.price});
-					this.quantity++;
-					this.total += newItem.price;
-				}else{
-					// jika barang sudah ada, cek apakah barang
-					this.items = this.items.map((item) => {
-
-						if (item.id !== newItem.id) {
-							return item;
-						}else{
-							item.quantity++;
-							item.total = item.price * item.quantity;
-							this.quantity++;
-							this.total += item.price;
-							return item
-						}
-					})
-				}
+	
+			add(newItem, qty = 1, duration = 1) {
+					const cartItem = this.items.find((item) => item.id === newItem.id);
+	
+					if (!cartItem) {
+							this.items.push({
+									...newItem,
+									quantity: qty,
+									total: newItem.price * qty * duration,
+									duration: duration
+							});
+							this.quantity += qty;
+							this.total += newItem.price * qty * duration;
+					} else {
+							this.items = this.items.map((item) => {
+									if (item.id !== newItem.id) {
+											return item;
+									} else {
+											item.quantity += qty;
+											item.duration += duration;
+											item.total = item.price * item.quantity * item.duration;
+											this.quantity += qty;
+											this.total = this.calculateTotal();
+											return item;
+									}
+							});
+					}
 			},
-
-			remove(id){
-				const cartItem = this.items.find((item) => item.id === id);
-
-				// jika item lebih dari satu
-
-				if(cartItem.quantity >1) {
+	
+			
+			addQty(item, qty) {
+					const cartItem = this.items.find((cartItem) => cartItem.id === item.id);
+	
+					if (!cartItem) {
+							// Handle jika item belum ada di keranjang
+							return;
+					}
+	
 					this.items = this.items.map((item) => {
-						
-						if(item.id  !== id) {
-							return item;
-						} else{
-							item.quantity--;
-							item.total = item.price * item.quantity;
-							this.quantity--;
-							this.total -= item.price;
-							return item;
-						}
+							if (item.id !== cartItem.id) {
+									return item;
+							} else {
+									item.quantity += qty;
+									item.total = item.price * item.quantity * item.duration;
+									this.quantity += qty;
+									this.total = this.calculateTotal();
+									return item;
+							}
 					});
-				} else if (cartItem.quantity === 1) {
-					this.items = this.items.filter((item) => item.id !== id);
-
-					this.quantity--;
-					this.total -= cartItem.price; 
-				}
 			},
-		
+			addDuration(item, duration) {
+				this.add(item, 0, duration);
+			},
+			calculateTotal() {
+        return this.items.reduce((acc, item) => acc + item.total, 0);
+    	},
+
+			
+			remove(id) {
+        const cartItem = this.items.find((item) => item.id === id);
+
+        if (cartItem.quantity > 1) {
+            this.items = this.items.map((item) => {
+                if (item.id !== id) {
+                    return item;
+                } else {
+                    item.quantity--;
+                    item.total = item.price * item.quantity * item.duration; // Perbaikan perhitungan total
+                    this.quantity--;
+                    this.total = this.calculateTotal(); // Hitung ulang total
+                    return item;
+                }
+            });
+        } else if (cartItem.quantity === 1) {
+            this.items = this.items.filter((item) => item.id !== id);
+
+            this.quantity--;
+            this.total = this.calculateTotal(); // Hitung ulang total
+        }
+    	},
+	
+			removeDuration(id) {
+			const cartItem = this.items.find((item) => item.id === id);
+
+			if (cartItem.duration > 1) {
+					this.items = this.items.map((item) => {
+							if (item.id !== id) {
+									return item;
+							} else {
+									item.duration--;
+									item.total = item.price * item.quantity * item.duration; // Perbaikan perhitungan total
+									this.total = this.calculateTotal(); // Hitung ulang total
+									return item;
+							}
+					});
+			} else if (cartItem.duration === 1) {
+					// Handle jika durasi sama dengan 1
+					// ...
+			}
+			},
 		});
+	
 		
 });
 
