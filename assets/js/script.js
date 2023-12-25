@@ -182,8 +182,7 @@
       if(!hm.contains(e.target) && !header.contains(e.target)) {
         body.classList.remove('mobile-nav-active');
         let navbarToggle = select(".mobile-nav-toggle");
-        navbarToggle.classList.toggle("bi-list");
-        navbarToggle.classList.toggle("bi-x");
+   
       }
       if(!sc.contains(e.target) && !shoppingCart.contains(e.target)) {
         shoppingCart.classList.remove('active');

@@ -96,35 +96,35 @@
         </div>
       </template>
     
-      <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;"> Cart Is Empty</h4>
-      <h4 x-show="$store.cart.items.length"> Total : <span x-text="rupiah($store.cart.total)"></span> </h4>
-      <form action="" id="checkout" x-show="$store.cart.items.length" >
-        <h3 class="mt-5 mb-2 text-center">Costumer Detail</h3>
-        <div class="form-floating mb-3">
-          <input type="date"class="form-control form-control-sm" name="date" id="date" placeholder="date">
-          <label for="date">Tanggal Pemesanan</label>
+        <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;"> Cart Is Empty</h4>
+        <h4 x-show="$store.cart.items.length"> Total : <span x-text="rupiah($store.cart.total)"></span> </h4>
+        <div class="form-container" x-show="$store.cart.items.length">
+          <form action="" id="checkout">
+            <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
+            <input type="hidden" name="total" x-model="JSON.stringify($store.cart.total)">
+            <h3 class="mt-5 mb-2 text-center">Costumer Detail</h3>
+              <label for="date">
+                <span>Tgl Pesanan</span>
+                <input type="date" name="date" id="date">
+              </label>
+              <label for="name">
+                <span>Name</span>
+                <input type="text" name="name" id="name">
+              </label>
+              <label for="email">
+                <span>Email</span>
+                <input type="email" name="email" id="email">
+              </label>
+              <label for="phone">
+                <span>Phone</span>
+                <input type="number" name="phone" id="phone" autocomplete="off"> 
+              </label>
+            <div class="text-center mb-2">
+              <button type="submit" value="checkout" class="btn btn-dark btn-sm checkout-button disable">Check Out</button>
+            </div>
+          </form>
         </div>
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control form-control-sm" name="nama" id="name" placeholder="name">
-          <label for="name">Nama</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="name@example.com">
-          <label for="email">Email address</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="number" class="form-control form-control-sm" name="no_telp" id="no_telp" placeholder="812344566">
-          <label for="no_telp">No Telp</label>
-        </div>
-        <div class="form-floating">
-          <textarea class="form-control form-control-sm" name="alamat" id placeholder="Leave a comment here" id="alamat"></textarea>
-          <label for="alamat">Alamat</label>
-        </div>
-        <div class="text-center mb-2">
-          <button type="submit" id="submit" class="btn btn-dark">Check Out</button>
-        </div>
-      </form>
-    </div>
+      </div>
 
     </header>
     <!-- End Header -->
@@ -833,9 +833,10 @@
   <!-- Alpine.js -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-  <!-- App -->
-  <script src="assets/src/app.js"></script>
-  <script src="assets/js/script.js"></script>
+  
+    <!-- App -->
+    <script src="assets/src/app.js"></script>
+    <script src="assets/js/script.js"></script>
 
   <!-- Template Main JS File -->
   <!-- <script src="https://nonapetualang.com/assets/js/main.js"></script> -->
@@ -971,5 +972,6 @@
         
         // }
     </script>
+
   </body>
 </html>

@@ -14,11 +14,11 @@ document.addEventListener('alpine:init', () => {
 			{id: 9, name: 'Osprey Kestrey 48', img: 'carrier4.jpg', price:40000},
 		],	
 		masak: [
-			{id: 10, name: 'Kompor Portable Kotak', img: 'masak1.jpg', price:12000},
-			{id: 11, name: 'Kompor Portable Mawar', img: 'masak2.jpg', price:15000},
-			{id: 12, name: 'Kompor Portable Koper', img: 'masak3.jpg', price:20000},
-			{id: 13, name: 'Cooking Seet Ds 200', img: 'masak4.jpg', price:12000},
-			{id: 14, name: 'Cooking Seet Ds 308', img: 'masak5.jpg', price:15000},
+			{id: 10, name: 'Kompor Kotak', img: 'masak1.jpg', price:12000},
+			{id: 11, name: 'Kompor Mawar', img: 'masak2.jpg', price:15000},
+			{id: 12, name: 'Kompor Koper', img: 'masak3.jpg', price:20000},
+			{id: 13, name: 'Cooking Seet 200', img: 'masak4.jpg', price:12000},
+			{id: 14, name: 'Cooking Seet 308', img: 'masak5.jpg', price:15000},
 			{id: 15, name: 'Gas Portable Refil', img: 'masak6.jpg', price:8000},
 		],	
 		penerangan: [
@@ -149,6 +149,54 @@ document.addEventListener('alpine:init', () => {
 	
 		
 });
+
+
+const checkoutButton = document.querySelector(".checkout-button");
+checkoutButton.disabled = true;
+
+const form = document.querySelector("#checkout");
+
+form.addEventListener('keyup', function(e) {
+	e.preventDefault()
+	for (let i = 0; i < form.elements.length; i++) {
+		if(form.elements[i].value.length !== 0) {
+			checkoutButton.classList.remove('disable');
+			checkoutButton.classList.add('disable');
+		} else{
+			return false;
+		}
+	}
+
+	checkoutButton.disabled = false;
+	checkoutButton.classList.remove('disable');
+});
+
+
+// checkout
+
+checkoutButton.addEventListener('click', function(e) {
+	e.preventDefault();
+	const formData = new FormData(form);
+	const data = new URLSearchParams(formData);
+	const objData = Object.fromEntries(data);
+
+	const message = formatMessage(objData);
+
+	window.open('https://wa.me/6287728025262?text=' + encodeURIComponent(message));
+});
+
+const formatMessage = (obj) => {
+	return `Tanggal Pesanan ${obj.date}
+Data Customer
+	Nama : ${obj.name}
+	Email : ${obj.email}
+	No Hp : ${obj.phone}
+Data Pesanan
+${JSON.parse(obj.items).map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)}  ${item.duration} Hari) \n`)}
+TOTAL : ${rupiah(obj.total)}
+Terima Kasih.
+	`;
+}
 
 // Konversi Rupiah
 
