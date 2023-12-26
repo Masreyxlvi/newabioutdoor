@@ -210,12 +210,7 @@
         <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;">- Alat yang disewakan sudah dicuci</p>
         <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;"><strong><span style="color: rgb(1, 115, 193);">>> BANYAK PILIHAN</span></strong></p>
         <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;">- Ada banyak pilihan warna, model dan merek</p>
-        <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;"><strong><span style="color: rgb(1, 115, 193);">>> MERK TERNAMA</span></strong></p>
-        <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;">- Eiger, Rei, Consina, Coozmed, Forester, Claw, Speed, Naturehike</p>
-        <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;"><strong style="color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; font-style: italic;"><span style="color: rgb(1, 115, 193);">>> FREE SEWA</span></strong></p>
-        <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;"><span style="color: rgb(1, 115, 193);"><span style="color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);">- Gratis sewa sajadah lipat dan kotak P3K</span></span><span style="color: rgb(1, 115, 193);"><span style="color: rgb(39, 40, 41); font-family: open sans sans-serif; font-size: 16px; background-color: rgb(255, 255, 255);"></span></span>
-          <br />
-        </p>
+       
         <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;"><strong><span style="color: rgb(1, 115, 193);">>> FREE</span></strong></p>
         <p class="fst-italic" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; font-size: 16px; background-color: rgb(255, 255, 255); font-style: italic;">- Gratis kopi dan isi ulang air minum&nbsp;</p>
         <p class="fst-italic" style="font-size: 16px; box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; color: rgb(39, 40, 41); font-family: 'Open Sans', sans-serif; background-color: rgb(255, 255, 255); font-style: italic;"><strong><span style="color: rgb(1, 115, 193);">>> <span style="font-size: 21px;">+++</span></span></strong></p>
@@ -755,20 +750,20 @@
               <div style="font-size: 12px;">
                 <img src="https://nonapetualang.com/assets/img/wa_icon.png" style="width: 35px;"> : Hubungi kami melalui WhatsApp !
               </div>
-              <form action="https://nonapetualang.com/home/contact" method="post" role="form" class="php-email-form">
+              <!-- <form action="https://nonapetualang.com/home/contact" method="post" role="form" class="php-email-form"> -->
                 <div class="form-group mt-3">
                   <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message for whatsapp" required></textarea>
                 </div>
-                <div class="my-3">
+                <!-- <div class="my-3">  
                   <div class="loading">Loading</div>
                   <div class="error-message"></div>
                   <div class="sent-message">Pesan anda telah terkirim. Terima kasih !</div>
-                </div>
+                </div> -->
                 <div class="text-center">
-                  <button type="submit" class="btn btn-sm" id="sendContact">Kirim</button>
-                  <!-- <button type="button" class="btn btn-sm" id="sendContact" onClick="sendContact()">Kirim</button> -->
+                  <!-- <button type="submit" class="btn btn-sm" id="sendContact">Kirim</button> -->
+                  <button type="button" class="btn btn-info mt-3" id="sendContact" onclick="sendContact()">Kirim</button>
                 </div>
-              </form>
+              <!-- </form> -->
   
             </div>
   
@@ -916,12 +911,22 @@
         var options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
         var formattedDate = inputTanggal.toLocaleDateString("id-ID", options);
       });
+
+      function sendContact(){
+          
+          var text = $('#message').val();
+
+          window.open('https://wa.me/6287728025262?text=' + encodeURIComponent(text));
+
+          // $('#message').val('')
+
+          }
     </script>
     <script>
       
       $(document).ready(function() {
         init();
-  
+        
         $( "#draggable" ).draggable();
         
           var url  = window.location.href; 
@@ -962,15 +967,7 @@
           document.addEventListener("touchend", touchHandler, true);
           document.addEventListener("touchcancel", touchHandler, true);
       }
-        // function sendContact(){
-  
-          // var text = $('#message').val();
-  
-          // window.open('https://api.whatsapp.com/send?phone=6281296718070&text='+text,'_blank');
-  
-          // $('#message').val('')
         
-        // }
     </script>
 
   </body>
