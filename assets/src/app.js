@@ -23,7 +23,7 @@ document.addEventListener('alpine:init', () => {
 		],	
 		penerangan: [
 			{id: 16, name: 'HeadLamp', img: 'penerangan1.jpg', price:8000},
-			{id: 17, name: 'HeadLamp Electric', img: 'penerangan2.jpg', price:10000},
+			{id: 17, name: 'Headlamp Electric', img: 'penerangan2.jpg', price:10000},
 			{id: 18, name: 'Lampu Tenda', img: 'penerangan3.jpg', price:8000},
 		],
 		pribadi: [
@@ -187,14 +187,16 @@ checkoutButton.addEventListener('click', function(e) {
 
 const formatMessage = (obj) => {
 	return `Tanggal Pesanan ${obj.date}
+
 Data Customer
 	Nama : ${obj.name}
 	Email : ${obj.email}
 	No Hp : ${obj.phone}
+	 
 Data Pesanan
-${JSON.parse(obj.items).map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)}  ${item.duration} Hari) \n`)}
+${JSON.parse(obj.items).map((item) => `${item.name} (${item.quantity} x ${rupiah(item.price)})  ${item.duration} Hari = ${rupiah(item.total)} \n`)}
 TOTAL : ${rupiah(obj.total)}
-Terima Kasih.
+Terima Kasih. 
 	`;
 }
 
