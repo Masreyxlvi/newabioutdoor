@@ -119,9 +119,13 @@
                 <span>Phone</span>
                 <input type="number" name="phone" id="phone" autocomplete="off"> 
               </label>
-            <div class="text-center mb-2">
-              <button type="submit" value="checkout" class="btn btn-dark btn-sm checkout-button disable">Check Out</button>
+            <div class="text-end mt-3">
+              <button type="submit" value="checkout" class="btn btn-dark btn-sm checkout-button disable">Checkout (<span x-text="$store.cart.quantity"  x-show="$store.cart.quantity"></span>)</button>
             </div>
+            <div class="text-center mt-3">
+              <p><i> Terhitung 1 Hari Sewa di Setiap Pengambilan Barang Dari Jam 15.00 WIB. Kurang Dari Itu Sudah Terhitung Sewa Lebih Dari 1 Hari</i></p>
+            </div>
+          
           </form>
         </div>
       </div>
@@ -616,7 +620,7 @@
                     <a href="#" @click.prevent="$store.cart.add(item)"><i class="bx bx-cart"></i></a>
                   </div>
                 </div>
-              </div>
+              </div> 
             </div>
           </template>
           
@@ -754,11 +758,7 @@
                 <div class="form-group mt-3">
                   <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message for whatsapp" required></textarea>
                 </div>
-                <!-- <div class="my-3">  
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Pesan anda telah terkirim. Terima kasih !</div>
-                </div> -->
+                
                 <div class="text-center">
                   <!-- <button type="submit" class="btn btn-sm" id="sendContact">Kirim</button> -->
                   <button type="button" class="btn btn-info mt-3" id="sendContact" onclick="sendContact()">Kirim</button>

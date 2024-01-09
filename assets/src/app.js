@@ -195,8 +195,11 @@ Data Customer
 	 
 Data Pesanan
 ${JSON.parse(obj.items).map((item) => `${item.name} (${item.quantity} x ${rupiah(item.price)})  ${item.duration} Hari = ${rupiah(item.total)} \n`)}
-TOTAL : ${rupiah(obj.total)}
-Terima Kasih. 
+TOTAL PEMBAYARAN: ${rupiah(obj.total)}
+
+_Terhitung 1 Hari Sewa di Setiap Pengambilan Barang Dari Jam 15.00 WIB. Kurang Dari Itu Sudah Terhitung Sewa Lebih Dari 1 Hari, Terimakasih._
+Salam Admin Newabi.
+Andi Maulana.
 	`;
 }
 
